@@ -6,7 +6,7 @@
 /*   By: timurray <timurray@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 12:44:43 by timurray          #+#    #+#             */
-/*   Updated: 2025/06/16 15:53:13 by timurray         ###   ########.fr       */
+/*   Updated: 2025/06/17 15:29:07 by timurray         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,34 @@ char *get_next_line(int fd)
 {
 	char *line;
 	ssize_t	count;
-	void *buf[BUFFER_SIZE];
+	void *buf[BUFFER_SIZE+1];
+	int i;
+	int newline_found;
+	char *temp[BUFFER_SIZE+1];
 
 	count = 0;
-	count = read(fd, buf, BUFFER_SIZE);
-	printf("char read: %zi\n", count);
-	printf("read: %s", (char *)buf);
+	newline_found = 0;
+	while (buf[i])
+	{
+		buf[i++] = 0;
+	};
+	i = 0;
+	while ((count = read(fd, buf, BUFFER_SIZE-1)) && (newline_found == 0))
+	{
+		// printf("\nread: %s\n", (char *)buf);
+		
+		i = 0;
+		while (buf[i])
+		{
+			if (buf[i] != '\n')
+			{
+				temp[i] = buf[i];
+			}
+			buf[i++] = 0;
+		};
+		printf("\nread: %s\n", temp);
+	}
+	printf("\n\n------------------------\nchar read: %zi\n", count);
 
 	return (line);
 }
