@@ -6,7 +6,7 @@
 /*   By: timurray <timurray@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 12:44:43 by timurray          #+#    #+#             */
-/*   Updated: 2025/06/17 15:29:07 by timurray         ###   ########.fr       */
+/*   Updated: 2025/06/18 16:14:16 by timurray         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,20 @@
 //Read one line from a file or stdin
 //If error or nothing or read, return NULL.
 //Return line should include \n EXCEPT when EOF is reached and has no \n
+
+//Has anything been stored?
+//Read into buffer
+//Has newline been found
+//If yes, everything up until newline is returned. Extra is stored.
+//If no, everything is stored, buffer is read again.
 char *get_next_line(int fd)
 {
 	char *line;
 	ssize_t	count;
-	void *buf[BUFFER_SIZE+1];
+	char buf[BUFFER_SIZE+1];
 	int i;
 	int newline_found;
-	char *temp[BUFFER_SIZE+1];
+	char temp[100];
 
 	count = 0;
 	newline_found = 0;
@@ -32,23 +38,15 @@ char *get_next_line(int fd)
 	{
 		buf[i++] = 0;
 	};
+
 	i = 0;
-	while ((count = read(fd, buf, BUFFER_SIZE-1)) && (newline_found == 0))
+
+	newline_found = 0;
+	while ((newline_found == 0) && (count = read(fd, buf, 1)))
 	{
-		// printf("\nread: %s\n", (char *)buf);
-		
-		i = 0;
-		while (buf[i])
-		{
-			if (buf[i] != '\n')
-			{
-				temp[i] = buf[i];
-			}
-			buf[i++] = 0;
-		};
-		printf("\nread: %s\n", temp);
 	}
-	printf("\n\n------------------------\nchar read: %zi\n", count);
+
+	printf("\n\n------------------------\nchar read: %zi", count);
 
 	return (line);
 }
@@ -67,8 +65,10 @@ int main(void)
 	{
 		printf("\nfd = %i\n", fd);
 		get_next_line(fd);
+		get_next_line(fd);
+		get_next_line(fd);
 	}
 	
-	printf("\n\n%i", BUFFER_SIZE);
+	printf("\nBUFFER SIZE: %i", BUFFER_SIZE);
 	return (1);
 }
