@@ -6,7 +6,7 @@
 /*   By: timurray <timurray@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 12:44:43 by timurray          #+#    #+#             */
-/*   Updated: 2025/06/18 16:14:16 by timurray         ###   ########.fr       */
+/*   Updated: 2025/06/18 16:47:52 by timurray         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,17 @@
 //Return line should include \n EXCEPT when EOF is reached and has no \n
 
 //Has anything been stored?
+//If yes, prepend new reads
+//If no, add to here
 //Read into buffer
 //Has newline been found
 //If yes, everything up until newline is returned. Extra is stored.
-//If no, everything is stored, buffer is read again.
+//If no, everything is stored, read again.
 char *get_next_line(int fd)
 {
 	char *line;
 	ssize_t	count;
-	char buf[BUFFER_SIZE+1];
+	char buf[BUFFER_SIZE + 1];
 	int i;
 	int newline_found;
 	char temp[100];
