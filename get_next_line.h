@@ -6,7 +6,7 @@
 /*   By: timurray <timurray@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 12:45:26 by timurray          #+#    #+#             */
-/*   Updated: 2025/06/18 12:08:33 by timurray         ###   ########.fr       */
+/*   Updated: 2025/06/19 11:13:46 by timurray         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 # include <stdint.h>
 
 char *get_next_line(int fd);
-int	ft_strncmp(const char *s1, const char *s2, size_t n);
+size_t	ft_strlen(const char *s);
 
 
 #endif

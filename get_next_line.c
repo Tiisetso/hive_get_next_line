@@ -6,7 +6,7 @@
 /*   By: timurray <timurray@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 12:44:43 by timurray          #+#    #+#             */
-/*   Updated: 2025/06/18 16:47:52 by timurray         ###   ########.fr       */
+/*   Updated: 2025/06/19 12:43:18 by timurray         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,28 +28,29 @@
 char *get_next_line(int fd)
 {
 	char *line;
-	ssize_t	count;
-	char buf[BUFFER_SIZE + 1];
+	static char buf[BUFFER_SIZE];
+	int length;
 	int i;
-	int newline_found;
-	char temp[100];
 
-	count = 0;
-	newline_found = 0;
-	while (buf[i])
+	length = ft_strlen(buf);
+	if (length = 0) //nothing stored
 	{
-		buf[i++] = 0;
-	};
+		read(fd, buf, BUFFER_SIZE);
+		i = 0;
+		//Find \n
+		//If found extract line and store remainder
+		
+		while (buf[i] || i < BUFFER_SIZE)
+		{
 
-	i = 0;
-
-	newline_found = 0;
-	while ((newline_found == 0) && (count = read(fd, buf, 1)))
-	{
+		}
 	}
+	else //something stored
+	{
 
-	printf("\n\n------------------------\nchar read: %zi", count);
-
+	}
+	
+	//Line malloc to be size of stored + new
 	return (line);
 }
 
@@ -65,9 +66,6 @@ int main(void)
 	}
 	else
 	{
-		printf("\nfd = %i\n", fd);
-		get_next_line(fd);
-		get_next_line(fd);
 		get_next_line(fd);
 	}
 	
