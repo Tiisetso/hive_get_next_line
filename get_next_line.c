@@ -6,7 +6,7 @@
 /*   By: timurray <timurray@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 12:44:43 by timurray          #+#    #+#             */
-/*   Updated: 2025/06/19 12:43:18 by timurray         ###   ########.fr       */
+/*   Updated: 2025/06/19 15:12:36 by timurray         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,43 +14,38 @@
 
 #include <stdio.h> //TODO: remove
 
+//Requirements
 //Read one line from a file or stdin
 //If error or nothing or read, return NULL.
 //Return line should include \n EXCEPT when EOF is reached and has no \n
 
-//Has anything been stored?
-//If yes, prepend new reads
-//If no, add to here
-//Read into buffer
-//Has newline been found
-//If yes, everything up until newline is returned. Extra is stored.
-//If no, everything is stored, read again.
+//Store a string that has at least one '\n'.
+//Read line until '\n' is found
+//If readline already has a '\n' return it
+//If readline doesn't have '\n' read and append buffer. Check again.
+char *ft_read_line(char *read_line, int fd)
+{
+	int count;
+
+	count = 0;
+
+	return (read_line);
+}
+//Get the first line from the stored readline.
+char *ft_new_line(char *read_line)
+{
+	char *new_line;
+
+	return (new_line);
+}
+
+//Stores the fully read
 char *get_next_line(int fd)
 {
+	static char *read_line;
 	char *line;
-	static char buf[BUFFER_SIZE];
-	int length;
-	int i;
+	read_line = ft_read_line(read_line, fd);
 
-	length = ft_strlen(buf);
-	if (length = 0) //nothing stored
-	{
-		read(fd, buf, BUFFER_SIZE);
-		i = 0;
-		//Find \n
-		//If found extract line and store remainder
-		
-		while (buf[i] || i < BUFFER_SIZE)
-		{
-
-		}
-	}
-	else //something stored
-	{
-
-	}
-	
-	//Line malloc to be size of stored + new
 	return (line);
 }
 
