@@ -6,7 +6,7 @@
 /*   By: timurray <timurray@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 12:45:05 by timurray          #+#    #+#             */
-/*   Updated: 2025/06/20 11:41:51 by timurray         ###   ########.fr       */
+/*   Updated: 2025/06/20 12:22:31 by timurray         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,4 +69,54 @@ char	*ft_strchr(const char *s, int c)
 	if (c == '\0' && *s == (const char)c)
 		return ((char *)s);
 	return (NULL);
+}
+
+int	newline_index(const char *s, int c)
+{
+	int i;
+
+	i = 0;
+	while (s[i])
+	{
+		if (s[i] == (const char)c)
+			return (i);
+		i++;
+	}
+	return (0);
+}
+
+char	*ft_substr(char const *s, unsigned int start, size_t len)
+{
+	size_t	s_len;
+	size_t	substr_len;
+	char	*substr;
+
+	if (!s)
+		return (NULL);
+	s_len = ft_strlen(s);
+	if (start >= s_len)
+		return (ft_strdup(""));
+	substr_len = s_len - start;
+	if (len > (substr_len))
+		len = (substr_len);
+	substr = (char *)malloc(len + 1);
+	if (!substr)
+		return (NULL);
+	ft_memcpy(substr, s + start, len);
+	substr[len] = '\0';
+	return (substr);
+}
+
+char	*ft_strdup(const char *s)
+{
+	char	*strdup;
+	size_t	len;
+
+	len = ft_strlen(s);
+	strdup = (char *)malloc((len + 1) * sizeof(char));
+	if (strdup == NULL)
+		return ((char *) NULL);
+	ft_memcpy(strdup, s, len);
+	strdup[len] = '\0';
+	return (strdup);
 }
