@@ -6,7 +6,7 @@
 /*   By: timurray <timurray@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 12:44:43 by timurray          #+#    #+#             */
-/*   Updated: 2025/06/19 15:12:36 by timurray         ###   ########.fr       */
+/*   Updated: 2025/06/20 11:44:57 by timurray         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,37 @@
 
 #include <stdio.h> //TODO: remove
 
-//Requirements
-//Read one line from a file or stdin
-//If error or nothing or read, return NULL.
-//Return line should include \n EXCEPT when EOF is reached and has no \n
+/* Requirements
+Read one line from a file or stdin
+If error or nothing or read, return NULL.
+Return line should include \n EXCEPT when EOF is reached and has no \n
 
-//Store a string that has at least one '\n'.
-//Read line until '\n' is found
-//If readline already has a '\n' return it
-//If readline doesn't have '\n' read and append buffer. Check again.
+Store a string that has at least one '\n'.
+Read line until '\n' is found
+If readline already has a '\n' return it
+If readline doesn't have '\n' read and append buffer. Check again. */
 char *ft_read_line(char *read_line, int fd)
 {
 	int count;
+	char buf[BUFFER_SIZE + 1];
 
 	count = 0;
-
+	if (!read_line)
+	{
+		read_line = (char *)malloc(1);
+		if (!read_line)
+			return (NULL);
+		read_line[0] = '\0';
+	}
+	while (ft_strchr(read_line, '\n') == NULL)
+	{
+		count = read(fd, buf, BUFFER_SIZE);
+		buf[count] = '\0';
+		read_line = ft_strjoin(read_line, buf);
+	}
 	return (read_line);
 }
-//Get the first line from the stored readline.
+// Get the first line from the stored readline.
 char *ft_new_line(char *read_line)
 {
 	char *new_line;
@@ -44,7 +57,9 @@ char *get_next_line(int fd)
 {
 	static char *read_line;
 	char *line;
+
 	read_line = ft_read_line(read_line, fd);
+	printf("\nline read: %s", read_line);
 
 	return (line);
 }
