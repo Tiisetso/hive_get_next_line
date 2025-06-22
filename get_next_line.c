@@ -6,7 +6,7 @@
 /*   By: timurray <timurray@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 12:44:43 by timurray          #+#    #+#             */
-/*   Updated: 2025/06/22 14:38:02 by timurray         ###   ########.fr       */
+/*   Updated: 2025/06/22 15:57:18 by timurray         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,16 +39,15 @@ char *ft_read_line(char *read_line, int fd)
 	while (ft_strchr(read_line, '\n') == NULL)
 	{
 		count = read(fd, buf, BUFFER_SIZE);
+		// printf("\n--count--\n%i", count);
+		if (count == 0)
+		{	
+			return (NULL);
+		}
 		buf[count] = '\0';
 		read_line = ft_strjoin(read_line, buf);
 	}
 	return (read_line);
-}
-// Get the first line from the stored readline.
-char *ft_new_line(char *read_line)
-{
-	char *new_line;
-	return (new_line);
 }
 
 //Stores the fully read
@@ -60,12 +59,14 @@ char *get_next_line(int fd)
 	int length;
 
 	read_line = ft_read_line(read_line, fd);
+	if (read_line == NULL)
+		return (NULL);
 	// printf("\nBuffer read line:\n%s", read_line);
 
 	n_index = newline_index(read_line, '\n');
 	// printf("\nnewline index: %i\n", n_index);
 
-	line = ft_substr(read_line, 0, n_index);
+	line = ft_substr(read_line, 0, n_index +1);
 	// printf("\nExtracted line:\n%s", line);
 
 	length = (ft_strlen(read_line) - n_index);
@@ -78,6 +79,7 @@ char *get_next_line(int fd)
 int main(void)
 {
 	int fd;
+	char *line;
 
 
 	fd = open("test.txt", O_RDONLY);
@@ -87,12 +89,14 @@ int main(void)
 	}
 	else
 	{
-		printf("\n\nnext line: %s", get_next_line(fd));
-		printf("\n\nnext line: %s", get_next_line(fd));
-		printf("\n\nnext line: %s", get_next_line(fd));
-		printf("\n\nnext line: %s", get_next_line(fd));
-		printf("\n\nnext line: %s", get_next_line(fd));
-	}	
-	printf("\nBUFFER SIZE: %i", BUFFER_SIZE);
+		line = get_next_line(fd);
+		printf("%s", line);
+		while (line)
+		{
+			line = get_next_line(fd);
+			printf("%s", line);
+		}
+	}
+	close(fd);
 	return (1);
 }
