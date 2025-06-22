@@ -6,7 +6,7 @@
 /*   By: timurray <timurray@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 12:44:43 by timurray          #+#    #+#             */
-/*   Updated: 2025/06/20 12:24:03 by timurray         ###   ########.fr       */
+/*   Updated: 2025/06/22 14:38:02 by timurray         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,6 @@ char *ft_read_line(char *read_line, int fd)
 char *ft_new_line(char *read_line)
 {
 	char *new_line;
-
-
-
 	return (new_line);
 }
 
@@ -59,14 +56,21 @@ char *get_next_line(int fd)
 {
 	static char *read_line;
 	char *line;
-	int first_newline;
+	int n_index;
+	int length;
 
 	read_line = ft_read_line(read_line, fd);
-	// printf("\nline read: %s", read_line);
-	first_newline = newline_index(read_line, '\n');
-	printf("\nindex of newline: %i", first_newline);
-	line = ft_substr(read_line, 0, first_newline);
+	// printf("\nBuffer read line:\n%s", read_line);
 
+	n_index = newline_index(read_line, '\n');
+	// printf("\nnewline index: %i\n", n_index);
+
+	line = ft_substr(read_line, 0, n_index);
+	// printf("\nExtracted line:\n%s", line);
+
+	length = (ft_strlen(read_line) - n_index);
+	read_line = ft_substr(read_line, n_index + 1, length);
+	// printf("\n\nRemaining line:\n%s", read_line);
 	return (line);
 }
 
@@ -83,10 +87,12 @@ int main(void)
 	}
 	else
 	{
-		printf("\nnext line: %s", get_next_line(fd));
-		printf("\nnext line: %s", get_next_line(fd));
-	}
-	
+		printf("\n\nnext line: %s", get_next_line(fd));
+		printf("\n\nnext line: %s", get_next_line(fd));
+		printf("\n\nnext line: %s", get_next_line(fd));
+		printf("\n\nnext line: %s", get_next_line(fd));
+		printf("\n\nnext line: %s", get_next_line(fd));
+	}	
 	printf("\nBUFFER SIZE: %i", BUFFER_SIZE);
 	return (1);
 }

@@ -1,4 +1,6 @@
-Four
+First line
+Second line
+Third line
 This is line one, it is really long, longer than the buffer.
 This is line two.
 It was short.
