@@ -6,7 +6,7 @@
 /*   By: timurray <timurray@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 12:45:05 by timurray          #+#    #+#             */
-/*   Updated: 2025/06/23 13:01:55 by timurray         ###   ########.fr       */
+/*   Updated: 2025/06/23 13:34:37 by timurray         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ size_t	ft_strlen(const char *s)
 		count++;
 	return (count);
 }
-// Build the string of previously read line + buffer
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
