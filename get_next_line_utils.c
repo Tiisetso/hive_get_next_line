@@ -6,7 +6,7 @@
 /*   By: timurray <timurray@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 12:45:05 by timurray          #+#    #+#             */
-/*   Updated: 2025/06/20 12:22:31 by timurray         ###   ########.fr       */
+/*   Updated: 2025/06/23 13:01:55 by timurray         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ size_t	ft_strlen(const char *s)
 		count++;
 	return (count);
 }
-//Build the string of previously read line + buffer
+// Build the string of previously read line + buffer
+
 char	*ft_strjoin(char const *s1, char const *s2)
 {
 	size_t	s1_length;
@@ -57,33 +58,6 @@ void	*ft_memcpy(void *dest, const void *src, size_t n)
 	}
 	return (dest);
 }
-//Find '\n'
-char	*ft_strchr(const char *s, int c)
-{
-	while (*s)
-	{
-		if (*s == (const char)c)
-			return ((char *)s);
-		s++;
-	}
-	if (c == '\0' && *s == (const char)c)
-		return ((char *)s);
-	return (NULL);
-}
-
-int	newline_index(const char *s, int c)
-{
-	int i;
-
-	i = 0;
-	while (s[i])
-	{
-		if (s[i] == (const char)c)
-			return (i);
-		i++;
-	}
-	return (0);
-}
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
@@ -115,7 +89,7 @@ char	*ft_strdup(const char *s)
 	len = ft_strlen(s);
 	strdup = (char *)malloc((len + 1) * sizeof(char));
 	if (strdup == NULL)
-		return ((char *) NULL);
+		return (NULL);
 	ft_memcpy(strdup, s, len);
 	strdup[len] = '\0';
 	return (strdup);
