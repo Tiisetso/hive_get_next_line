@@ -6,13 +6,13 @@
 /*   By: timurray <timurray@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 12:44:43 by timurray          #+#    #+#             */
-/*   Updated: 2025/06/23 15:11:47 by timurray         ###   ########.fr       */
+/*   Updated: 2025/06/23 16:08:51 by timurray         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*read_line_check(char *read_line)
+char	*ft_read_line_check(char *read_line)
 {
 	if (!read_line)
 	{
@@ -33,8 +33,8 @@ char	*ft_read_line(char *read_line, int fd)
 	buf = (char *)malloc(BUFFER_SIZE + 1);
 	if (!buf)
 		return (NULL);
-	read_line = read_line_check(read_line);
-	while (!n_exist(read_line, '\n'))
+	read_line = ft_read_line_check(read_line);
+	while (!ft_n_exist(read_line, '\n'))
 	{
 		count = read(fd, buf, BUFFER_SIZE);
 		if (count <= 0)
@@ -50,7 +50,7 @@ char	*ft_read_line(char *read_line, int fd)
 	return (read_line);
 }
 
-int	get_n_index(const char *s, int c)
+int	ft_get_n_index(const char *s, int c)
 {
 	int	i;
 
@@ -64,7 +64,7 @@ int	get_n_index(const char *s, int c)
 	return (i);
 }
 
-char	*n_exist(const char *s, int c)
+char	*ft_n_exist(const char *s, int c)
 {
 	while (*s)
 	{
@@ -94,7 +94,7 @@ char	*get_next_line(int fd)
 		read_line = NULL;
 		return (NULL);
 	}
-	n_index = get_n_index(read_line, '\n');
+	n_index = ft_get_n_index(read_line, '\n');
 	line = ft_substr(read_line, 0, n_index + 1);
 	if (!line)
 		return (NULL);
